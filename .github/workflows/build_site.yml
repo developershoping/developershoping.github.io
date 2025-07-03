@@ -8,6 +8,12 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
+    # Memberikan izin kepada Action untuk menulis kembali ke repositori.
+    # Ini diperlukan agar langkah 'git push' berhasil.
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -28,4 +34,5 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add .
+          # Baris di bawah ini memeriksa apakah ada perubahan sebelum mencoba commit & push
           git diff --quiet && git diff --staged --quiet || (git commit -m "Build: auto-generate site files" && git push)
