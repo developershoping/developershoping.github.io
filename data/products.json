@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Kaos Polos Premium Cotton",
+    "price": 85000,
+    "image": "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=1887&auto=format&fit=crop",
+    "description": "Kaos polos bahan katun combed 30s, nyaman dan adem dipakai sehari-hari.",
+    "seller_whatsapp": "6281234567890"
+  },
+  {
+    "name": "Kemeja Flanel Lengan Panjang",
+    "price": 175000,
+    "image": "https://images.unsplash.com/photo-1617137968427-85924c800a22?q=80&w=1887&auto=format&fit=crop",
+    "description": "Kemeja flanel tebal dengan motif kotak-kotak klasik, cocok untuk gaya kasual.",
+    "seller_whatsapp": "6281234567890"
+  },
+  {
+    "name": "Sepatu Sneakers Kanvas",
+    "price": 250000,
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop",
+    "description": "Sneakers bahan kanvas dengan sol karet anti-slip, ringan dan stylish.",
+    "seller_whatsapp": "6281234567890"
+  }
+]
