@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Data Produk (JSON)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .result-box {
+            background-color: #2b3035; /* Warna gelap agar kontras */
+            color: #d7ba7d; /* Warna teks yang mirip editor kode */
+            padding: 1rem;
+            border-radius: .25rem;
+            white-space: pre; /* Jaga format spasi dan baris baru */
+            overflow-x: auto; /* Scroll jika teks terlalu panjang */
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5 mb-5">
+        <div class="text-center">
+            <h1 class="display-5" style="color: var(--whatsapp-teal);">Generator Data Produk</h1>
+            <p class="lead text-muted">Isi form ini untuk membuat kode JSON produk baru dengan aman.</p>
+        </div>
+        
+        <form id="product-generator-form" class="card p-4 mt-4">
+            <div class="mb-3">
+                <label for="product-name" class="form-label fw-bold">Nama Produk</label>
+                <input type="text" class="form-control" id="product-name" placeholder="Contoh: Dompet Kulit Pria" required>
+            </div>
+            <div class="mb-3">
+                <label for="product-price" class="form-label fw-bold">Harga Produk (Hanya Angka)</label>
+                <input type="number" class="form-control" id="product-price" placeholder="Contoh: 150000" required>
+            </div>
+            <div class="mb-3">
+                <label for="product-image" class="form-label fw-bold">URL Gambar Produk</label>
+                <input type="url" class="form-control" id="product-image" placeholder="https://...gambar-produk-anda.jpg" required>
+            </div>
+            <div class="mb-3">
+                <label for="product-description" class="form-label fw-bold">Deskripsi Singkat Produk</label>
+                <textarea class="form-control" id="product-description" rows="3" placeholder="Tulis deskripsi menarik di sini..." required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="seller-whatsapp" class="form-label fw-bold">Nomor WhatsApp Penjual (Format: 62...)</label>
+                <input type="text" class="form-control" id="seller-whatsapp" value="6281234567890" required>
+                <div class="form-text">Pastikan nomor ini benar. Ini adalah nomor yang akan menerima pesanan.</div>
+            </div>
+            <button type="submit" class="btn btn-whatsapp w-100 btn-lg">Generate Kode JSON</button>
+        </form>
+
+        <div id="result-container" class="mt-5" style="display: none;">
+            <h3 class="text-center mb-3">✅ Kode JSON Berhasil Dibuat!</h3>
+            <p class="text-center">Sekarang, ikuti 2 langkah mudah di bawah ini:</p>
+            
+            <div class="card mt-4">
+                <div class="card-header">
+                    <strong>Langkah 1: Salin Kode Ini</strong>
+                </div>
+                <div class="card-body">
+                    <p>Klik tombol "Salin Kode" untuk menyalin semua teks di kotak di bawah ini.</p>
+                    <div class="position-relative">
+                        <button class="btn btn-sm btn-light copy-btn" onclick="copyToClipboard()">
+                            <i class="bi bi-clipboard-check"></i> Salin Kode
+                        </button>
+                        <pre id="json-result" class="result-box"></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header">
+                    <strong>Langkah 2: Tempel ke `data/products.json`</strong>
+                </div>
+                <div class="card-body">
+                    <ol>
+                        <li>Buka file <a href="data/products.json" target="_blank">`data/products.json`</a> di tab baru.</li>
+                        <li>Klik ikon pensil (✎) untuk mengedit.</li>
+                        <li>Letakkan kursor setelah kurung kurawal penutup `}` dari produk terakhir, lalu ketik koma `,`.</li>
+                        <li>Tempel (Paste) kode yang sudah Anda salin.</li>
+                        <li>Klik "Commit changes". Selesai!</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('product-generator-form');
+        const resultContainer = document.getElementById('result-container');
+        const jsonResultEl = document.getElementById('json-result');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const product = {
+                name: document.getElementById('product-name').value,
+                price: parseInt(document.getElementById('product-price').value),
+                image: document.getElementById('product-image').value,
+                description: document.getElementById('product-description').value,
+                seller_whatsapp: document.getElementById('seller-whatsapp').value
+            };
+
+            // Mengubah objek JavaScript menjadi string JSON yang rapi
+            // null, 2 artinya formatnya akan memiliki indentasi 2 spasi
+            const jsonString = JSON.stringify(product, null, 2);
+
+            jsonResultEl.textContent = jsonString;
+            resultContainer.style.display = 'block';
+            window.scrollTo(0, document.body.scrollHeight); // Auto-scroll ke bawah
+        });
+
+        function copyToClipboard() {
+            navigator.clipboard.writeText(jsonResultEl.textContent).then(() => {
+                alert('Kode JSON berhasil disalin!');
+            }, (err) => {
+                alert('Gagal menyalin kode. Silakan salin secara manual.');
+            });
+        }
+    </script>
+</body>
+</html>
