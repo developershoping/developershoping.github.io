@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaos Polos Premium Cotton - NAMA TOKO ANDA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Kode Google AdSense Auto Ads Anda di sini. GANTI DENGAN KODE ANDA. -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+         crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">NAMA TOKO ANDA</a>
+            <a href="../index.html" class="btn btn-outline-light d-flex align-items-center gap-2">
+                <i class="bi bi-arrow-left-circle"></i> Kembali
+            </a>
+        </div>
+    </nav>
+    <div class="container my-5">
+        <div class="row g-5">
+            <div class="col-md-6">
+                <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=1887&auto=format&fit=crop" class="img-fluid rounded shadow-sm" alt="Kaos Polos Premium Cotton">
+            </div>
+            <div class="col-md-6">
+                <div class="product-detail-card h-100">
+                    <h2>Kaos Polos Premium Cotton</h2>
+                    <p class="text-muted lead">Kaos polos bahan katun combed 30s, nyaman dan adem dipakai sehari-hari.</p>
+                    <div class="price-tag my-3">Rp 85.000</div>
+                    <hr class="my-4">
+                    <h4>Pesan Sekarang</h4>
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Jumlah Barang:</label>
+                        <div class="input-group" style="max-width: 150px;">
+                            <button class="btn btn-outline-secondary" type="button" id="btn-minus">-</button>
+                            <input type="text" id="quantity" class="form-control text-center" value="1" min="1" readonly>
+                            <button class="btn btn-outline-secondary" type="button" id="btn-plus">+</button>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between my-4 p-3 rounded" style="background-color: #f0fff4;">
+                        <h5 class="mb-0">Total Harga:</h5>
+                        <div id="total-price" class="fw-bold fs-4 text-success">Rp 85.000</div>
+                    </div>
+                    <button id="buy-button" class="btn btn-whatsapp btn-lg w-100">
+                        <i class="bi bi-whatsapp"></i> Beli via WhatsApp
+                    </button>
+                    <!-- == SLOT IKLAN GOOGLE ADSENSE == -->
+                    <div class="ads-container mt-4 text-center">
+                         <!-- GANTI DENGAN KODE UNIT IKLAN ANDA (Detail_Produk_Bawah_Tombol) -->
+                         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+                         <ins class="adsbygoogle"
+                              style="display:block"
+                              data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                              data-ad-slot="YYYYYYYYYY"
+                              data-ad-format="auto"
+                              data-full-width-responsive="true"></ins>
+                         <script>
+                              (adsbygoogle = window.adsbygoogle || []).push({});
+                         </script>
+                    </div>
+                    <!-- == AKHIR SLOT IKLAN == -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const quantityInput = document.getElementById('quantity');
+        const totalPriceElement = document.getElementById('total-price');
+        const buyButton = document.getElementById('buy-button');
+        const btnMinus = document.getElementById('btn-minus');
+        const btnPlus = document.getElementById('btn-plus');
+        const basePrice = 85000;
+        const productName = "Kaos Polos Premium Cotton";
+        const sellerWhatsapp = "6281234567890";
+        function formatRupiah(angka) { return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka); }
+        function updateTotalPrice() {
+            const quantity = parseInt(quantityInput.value);
+            if (isNaN(quantity) || quantity < 1) { quantityInput.value = 1; updateTotalPrice(); return; }
+            totalPriceElement.innerText = formatRupiah(basePrice * quantity);
+        }
+        btnMinus.addEventListener('click', () => {
+            let currentVal = parseInt(quantityInput.value);
+            if (currentVal > 1) { quantityInput.value = currentVal - 1; updateTotalPrice(); }
+        });
+        btnPlus.addEventListener('click', () => {
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+            updateTotalPrice();
+        });
+        buyButton.addEventListener('click', function() {
+            const message = `Halo Kak, saya mau pesan produk ini:\n\n*Produk:* ${productName}\n*Jumlah:* ${quantityInput.value} Pcs\n*Total Harga:* ${formatRupiah(basePrice * parseInt(quantityInput.value))}\n\n*Link Produk:*\n${window.location.href}\n\nApakah barangnya ready? Terima kasih.`;
+            window.open(`https://wa.me/${sellerWhatsapp}?text=${encodeURIComponent(message)}`, '_blank');
+        });
+        updateTotalPrice();
+    </script>
+</body>
+</html>
