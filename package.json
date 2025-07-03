@@ -1,0 +1,11 @@
+{
+  "name": "toko-online-whatsapp",
+  "version": "1.0.0",
+  "description": "Static site generator for a WhatsApp-based e-commerce site.",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
